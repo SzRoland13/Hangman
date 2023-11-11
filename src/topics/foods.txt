@@ -1,0 +1,20 @@
+Burger
+Butter Chicken
+Chicken Curry
+Fried Rice
+Lasagna
+Meatball
+Omelette
+Pancakes
+Pasta Carbonara
+Pizza
+Roast Beef
+Spaghetti Bolognese
+Sushi
+Tandoori Chicken
+Tacos
+Tempura
+Teriyaki Salmon
+Tikka Masala
+Tortilla Soup
+Wonton Soup
