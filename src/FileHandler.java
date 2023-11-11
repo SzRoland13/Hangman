@@ -14,7 +14,7 @@ public class FileHandler {
             }
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + e.getMessage() + "\nPlease check the file path. ");
-            System.exit(404);
+            System.exit(1);
         }
         return lines;
     }

@@ -4,46 +4,64 @@ import java.util.Random;
 public class GameLogic {
 
     private static final int MAX_MISTAKES = 10;
-    FileHandler fileHandler = new FileHandler();
-    UserInterface userInterface = new UserInterface();
+    private ArrayList<String> wordList;
+    private StringBuilder guessedWord;
+    private int mistakes;
+    private String chosenWord;
 
 
-    public boolean playGame() {
-        String chosenWord = getRandomWord(fileHandler.readWordsOfTheme(userInterface.chooseTheme()));
-        StringBuilder sb = new StringBuilder("_".repeat(chosenWord.length()));
+    public void initializeGame(ThemeEnum themeEnum) {
+        FileHandler fileHandler = new FileHandler();
+        wordList = fileHandler.readWordsOfTheme(themeEnum);
+        startNewGame();
+    }
+
+    private void startNewGame() {
+        chosenWord = getRandomWord(wordList);
+        guessedWord = new StringBuilder("_".repeat(chosenWord.length()));
+        mistakes = 0;
         int i = 0;
         if (chosenWord.contains(" ")) {
             while (chosenWord.toLowerCase().indexOf(" ", i) != -1) {
-                sb.setCharAt(chosenWord.toLowerCase().indexOf(" ", i), ' ');
+                guessedWord.setCharAt(chosenWord.toLowerCase().indexOf(" ", i), ' ');
                 i = chosenWord.toLowerCase().indexOf(' ', i) + 1;
             }
         }
-        int mistake = 0;
+    }
 
-        System.out.println(sb);
-        while (sb.toString().contains("_") && mistake != MAX_MISTAKES) {
-            char ch = userInterface.getCharInput("Type in a character!: ");
-            int index = chosenWord.toLowerCase().indexOf(ch);
-
+    public void makeGuess(char guessedChar) {
+        System.out.println(guessedWord);
+        while (isGameRunning()) {
+            int index = chosenWord.toLowerCase().indexOf(guessedChar);
             if (index != -1) {
                 while (index != -1) {
-                    sb.setCharAt(index, chosenWord.charAt(index));
-                    index = chosenWord.toLowerCase().indexOf(ch, index + 1);
+                    guessedWord.setCharAt(index, chosenWord.charAt(index));
+                    index = chosenWord.toLowerCase().indexOf(guessedChar, index + 1);
                 }
                 System.out.println("Correct!");
             } else {
-                mistake++;
-                System.out.println("WRONG! You guessed it wrong " + mistake + " time(s)!");
+                mistakes++;
+                System.out.println("WRONG! You guessed it wrong " + mistakes + " time(s)!");
             }
 
-            System.out.println(sb);
+            System.out.println(guessedWord);
+
         }
-        return (!sb.toString().contains("_") && mistake != 10);
+
     }
+
+    public boolean isGameRunning() {
+        return guessedWord.toString().contains("_") && mistakes < MAX_MISTAKES;
+    }
+
+    public boolean isGameWon() {
+        return !guessedWord.toString().contains("_");
+    }
+
 
     private static String getRandomWord(ArrayList<String> arrayList) {
         Random random = new Random();
-        return arrayList.get(random.nextInt(arrayList.size()+1));
+        return arrayList.get(random.nextInt(arrayList.size()));
     }
 
 }
