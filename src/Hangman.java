@@ -55,12 +55,10 @@ public class Hangman {
                 2. Guess one letter at a time.
                 3. Correct guesses reveal the letters; incorrect ones add to the hanging man.
                 4. Win by guessing the word or lose if the hanging man appears.
-                
-                Ready to play? Type 'y' to start and 'n' to exit.
                 """;
         System.out.println(introBlock);
         while (true){
-            switch (getCharInput("")){
+            switch (getCharInput("Ready to play? (y/n): ")){
                 case 'y' -> {
                     System.out.println("Okay, here you go! Good luck!");
                     return true;
@@ -129,7 +127,6 @@ public class Hangman {
         }
         int mistake = 0;
 
-        System.out.println(chosenWord);
         System.out.println(sb);
         while (sb.toString().contains("_") && mistake != MAX_MISTAKES) {
             char ch = getCharInput("Type in a character!: ");
