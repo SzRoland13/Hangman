@@ -176,4 +176,7 @@ public class Hangman {
 /*
 Room for improvement:
  - Could make it a GUI app
+ - Make more themes and more words in each theme
+ - Make the code to not be able to get the same word one after another
+ - Make a pointing mechanism
  */
