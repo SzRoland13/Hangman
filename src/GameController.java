@@ -26,12 +26,12 @@ public class GameController {
     private void playSingleGame() {
         ThemeEnum themeEnum = userInterface.chooseTheme();
         gameLogic.initializeGame(themeEnum);
+        char ch;
+        gameLogic.firstLookAtTheWord();
 
         while (gameLogic.isGameRunning()) {
-
-            char ch = userInterface.getCharInput("Type in a character!: ");
+            ch = userInterface.getCharInput("Type in a character!: ");
             gameLogic.makeGuess(ch);
-            System.out.println("Correct!");
         }
 
         if (gameLogic.isGameWon()) {

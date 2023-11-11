@@ -30,24 +30,21 @@ public class GameLogic {
     }
 
     public void makeGuess(char guessedChar) {
-        System.out.println(guessedWord);
-        while (isGameRunning()) {
-            int index = chosenWord.toLowerCase().indexOf(guessedChar);
-            if (index != -1) {
-                while (index != -1) {
-                    guessedWord.setCharAt(index, chosenWord.charAt(index));
-                    index = chosenWord.toLowerCase().indexOf(guessedChar, index + 1);
-                }
-                System.out.println("Correct!");
-            } else {
-                mistakes++;
-                System.out.println("WRONG! You guessed it wrong " + mistakes + " time(s)!");
+        int index = chosenWord.toLowerCase().indexOf(guessedChar);
+        if (index != -1) {
+            while (index != -1) {
+                guessedWord.setCharAt(index, chosenWord.charAt(index));
+                index = chosenWord.toLowerCase().indexOf(guessedChar, index + 1);
             }
-
-            System.out.println(guessedWord);
-
+            System.out.println("Correct!");
+        } else {
+            mistakes++;
+            System.out.println("WRONG! You guessed it wrong " + mistakes + " time(s)!");
         }
-
+        System.out.println(guessedWord);
+    }
+    public void firstLookAtTheWord(){
+        System.out.println(guessedWord);
     }
 
     public boolean isGameRunning() {
