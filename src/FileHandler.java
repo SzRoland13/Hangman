@@ -5,16 +5,22 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-    public ArrayList<String> readFile(File file) {
-        ArrayList<String> arrayList = new ArrayList<>();
+    public ArrayList<String> readWordsOfTheme(ThemeEnum themeEnum) {
+        File file = new File(createPath(themeEnum));
+        ArrayList<String> lines = new ArrayList<>();
         try (Scanner sc = new Scanner(file)) {
             while (sc.hasNextLine()) {
-                arrayList.add(sc.nextLine());
+                lines.add(sc.nextLine());
             }
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + e.getMessage() + "\nPlease check the file path. ");
             System.exit(404);
         }
-        return arrayList;
+        return lines;
     }
+
+    private String createPath(ThemeEnum themeEnum) {
+        return System.getProperty("user.dir") + "/src/topics/" + themeEnum.getFileName();
+    }
+
 }

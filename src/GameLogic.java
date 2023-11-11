@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,10 +8,8 @@ public class GameLogic {
     UserInterface userInterface = new UserInterface();
 
 
-    public boolean playGame(String path) {
-        File file = new File(path);
-        ArrayList<String> words = fileHandler.readFile(file);
-        String chosenWord = randomChoosing(words);
+    public boolean playGame() {
+        String chosenWord = getRandomWord(fileHandler.readWordsOfTheme(userInterface.chooseTheme()));
         StringBuilder sb = new StringBuilder("_".repeat(chosenWord.length()));
         int i = 0;
         if (chosenWord.contains(" ")) {
@@ -44,9 +41,9 @@ public class GameLogic {
         return (!sb.toString().contains("_") && mistake != 10);
     }
 
-    private static String randomChoosing(ArrayList<String> arrayList) {
+    private static String getRandomWord(ArrayList<String> arrayList) {
         Random random = new Random();
-        return arrayList.get(random.nextInt(arrayList.size()));
+        return arrayList.get(random.nextInt(arrayList.size()+1));
     }
 
 }

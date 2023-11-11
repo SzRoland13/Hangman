@@ -2,11 +2,10 @@ import java.util.Scanner;
 
 public class UserInterface {
     private static final int MAX_THEME_ATTEMPTS = 3;
-
     private static final Scanner scanner = new Scanner(System.in);
 
 
-    public boolean printIntroduction() {
+    public void printIntroduction() {
 
         String introBlock = """
                 Welcome to Hangman!
@@ -21,8 +20,10 @@ public class UserInterface {
                 4. Win by guessing the word or lose if the hanging man appears.
                 """;
         System.out.println(introBlock);
-        return getAnswer("Ready to play? (y/n): ");
+    }
 
+    public boolean startToPlay() {
+        return getAnswer("Ready to play? (y/n): ");
     }
 
     private boolean getAnswer(String printQuestion) {
@@ -41,7 +42,7 @@ public class UserInterface {
         }
     }
 
-    public String chooseTheme() {
+    public ThemeEnum chooseTheme() {
 
         System.out.println("Before you can start the game, you need to choose a theme!");
         System.out.println("List of the current themes: ");
@@ -53,7 +54,7 @@ public class UserInterface {
             String input = getStringInput("What theme would you like to choose?: ");
             for (ThemeEnum theme : ThemeEnum.values()) {
                 if (input.equals(theme.name().toLowerCase())) {
-                    return theme.getFileName();
+                    return theme;
                 }
             }
             System.out.println("You typed something wrong! Please choose a valid theme.");
@@ -67,9 +68,6 @@ public class UserInterface {
         return getAnswer("Do you want to play again? (y/n): ");
     }
 
-    public String createPath() {
-        return System.getProperty("user.dir") + "/src/topics/" + chooseTheme();
-    }
 
     private static String getInput(String prompt) {
         System.out.print(prompt);

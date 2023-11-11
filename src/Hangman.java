@@ -7,9 +7,10 @@ public class Hangman {
 
         boolean play = true;
 
-        if (userInterface.printIntroduction()) {
+        userInterface.printIntroduction();
+        if (userInterface.startToPlay()) {
             while (play) {
-                if (gameLogic.playGame(userInterface.createPath())) {
+                if (gameLogic.playGame()) {
                     System.out.println("Congratulations!");
                 } else {
                     System.out.println("I'm sorry, but you didn't guessed it correctly.");
