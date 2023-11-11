@@ -20,13 +20,8 @@ public class GameLogic {
         chosenWord = getRandomWord(wordList);
         guessedWord = new StringBuilder("_".repeat(chosenWord.length()));
         mistakes = 0;
-        int i = 0;
-        if (chosenWord.contains(" ")) {
-            while (chosenWord.toLowerCase().indexOf(" ", i) != -1) {
-                guessedWord.setCharAt(chosenWord.toLowerCase().indexOf(" ", i), ' ');
-                i = chosenWord.toLowerCase().indexOf(' ', i) + 1;
-            }
-        }
+        revealSpacesInWord();
+
     }
 
     public void makeGuess(char guessedChar) {
@@ -43,9 +38,21 @@ public class GameLogic {
         }
         System.out.println(guessedWord);
     }
-    public void firstLookAtTheWord(){
+
+    public void firstLookAtTheWord() {
         System.out.println(guessedWord);
     }
+
+    private void revealSpacesInWord() {
+        int i = 0;
+        if (chosenWord.contains(" ")) {
+            while (chosenWord.toLowerCase().indexOf(" ", i) != -1) {
+                guessedWord.setCharAt(chosenWord.toLowerCase().indexOf(" ", i), ' ');
+                i = chosenWord.toLowerCase().indexOf(' ', i) + 1;
+            }
+        }
+    }
+
 
     public boolean isGameRunning() {
         return guessedWord.toString().contains("_") && mistakes < MAX_MISTAKES;
@@ -56,9 +63,9 @@ public class GameLogic {
     }
 
 
-    private static String getRandomWord(ArrayList<String> arrayList) {
+    private static String getRandomWord(ArrayList<String> listOfWords) {
         Random random = new Random();
-        return arrayList.get(random.nextInt(arrayList.size()));
+        return listOfWords.get(random.nextInt(listOfWords.size()));
     }
 
 }

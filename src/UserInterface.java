@@ -60,7 +60,7 @@ public class UserInterface {
             System.out.println("You typed something wrong! Please choose a valid theme.");
         }
         System.out.println("Too many incorrect attempts. Exiting the game.");
-        System.exit(0);
+        System.exit(1);
         return null;
     }
 
